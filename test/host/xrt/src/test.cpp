@@ -1259,7 +1259,10 @@ int main(int argc, char *argv[]) {
   //gather ACCL options for the test
   //NOTE: this has to come before the gtest environment is initialized
   options = parse_options(argc, argv);
-
+  
+  // Specify load_xclbin for each process
+  options.device_index += ::rank;
+  
   if(options.startemu){
     emulator_pid = start_emulator(options,::size,::rank);
     if(!emulator_is_running(emulator_pid)){
